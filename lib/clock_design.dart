@@ -232,7 +232,6 @@ class AnalogClockPainter extends CustomPainter {
     return new Offset(length * cos(angle), length * sin(angle));
   }
 
-  // ref: https://www.codenameone.com/blog/codename-one-graphics-part-2-drawing-an-analog-clock.html
   void _paintTickMarks(Canvas canvas, Size size, double scaleFactor) {
     double r = size.shortestSide / 2;
     double tick = 5 * scaleFactor,
@@ -244,21 +243,15 @@ class AnalogClockPainter extends CustomPainter {
       ..strokeWidth = 2.0 * scaleFactor;
 
     for (int i = 1; i <= 60; i++) {
-      // default tick length is short
       double len = tick;
       if (i % 15 == 0) {
-        // Longest tick on quarters (every 15 ticks)
         len = longTick;
       } else if (i % 5 == 0) {
-        // Medium ticks on the '5's (every 5 ticks)
         len = mediumTick;
       }
       // Get the angle from 12 O'Clock to this tick (radians)
       double angleFrom12 = i / 60.0 * 2.0 * pi;
 
-      // Get the angle from 3 O'Clock to this tick
-      // Note: 3 O'Clock corresponds with zero angle in unit circle
-      // Makes it easier to do the math.
       double angleFrom3 = pi / 2.0 - angleFrom12;
 
       canvas.drawLine(
