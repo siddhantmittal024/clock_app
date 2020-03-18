@@ -85,7 +85,6 @@ class _AnalogClockState extends State<AnalogClock> {
   initState() {
     super.initState();
     if (widget.isLive) {
-      // update clock every second or minute based on second hand's visibility.
       Duration updateDuration =
       widget.showSecondHand ? Duration(seconds: 1) : Duration(minutes: 1);
       Timer.periodic(updateDuration, update);
@@ -94,7 +93,6 @@ class _AnalogClockState extends State<AnalogClock> {
 
   update(Timer timer) {
     if (mounted) {
-      // update is only called on live clocks. So, it's safe to update datetime.
       datetime = DateTime.now();
       setState(() {});
     }
